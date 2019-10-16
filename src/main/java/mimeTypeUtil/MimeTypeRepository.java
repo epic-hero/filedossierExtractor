@@ -1,14 +1,10 @@
 package mimeTypeUtil;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MimeTypeRepository {
@@ -19,7 +15,8 @@ public class MimeTypeRepository {
     MimeTypeRepository() {
         List<String> lines = new ArrayList<>();
         try {
-            lines = Files.readAllLines(Paths.get(MimeTypeUtil.class.getClassLoader().getResource("mimetype/mime.types").toURI()));
+            lines = Files.readAllLines(Paths.get(
+                    Objects.requireNonNull(MimeTypeUtil.class.getClassLoader().getResource("mimetype/mime.types")).toURI()));
 //            lines = Files.readAllLines(Paths.get("mimetype/mime.types"));
         } catch (IOException | URISyntaxException ex) { //URISyntaxException
             throw new RuntimeException(ex);

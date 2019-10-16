@@ -6,7 +6,6 @@ import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.xmp.XmpDirectory;
-import mimeTypeUtil.MimeTypeUtil;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -17,22 +16,16 @@ import java.util.Map;
 public class JPEGMetadataExtractor implements MetadataExtractor {
 
     private byte[] rawImage;
-    private String propName;
 
-    public JPEGMetadataExtractor(byte[] rawImage, String propName) {
+    public JPEGMetadataExtractor(byte[] rawImage) {
         this.rawImage = rawImage;
-        this.propName = propName;
     }
 
     @Override
-    public String getProperty() {
-        if (!MimeTypeUtil.guessMimeTypeFromByteArray(rawImage).equals("image/jpeg")) {
-            return null;
-        }
-
+    public String getProperty(String propName) {
         InputStream is = new BufferedInputStream(new ByteArrayInputStream(rawImage));
 
-        Metadata metadata = null;
+        Metadata metadata;
         try {
             metadata = ImageMetadataReader.readMetadata(is);
         } catch (ImageProcessingException | IOException e) {

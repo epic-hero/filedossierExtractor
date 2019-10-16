@@ -17,7 +17,7 @@ public class PDFMetadataExtractor implements MetadataExtractor {
     }
 
     @Override
-    public String getProperty() {
+    public String getProperty(String prop) {
         // Do nothing
         return null;
     }

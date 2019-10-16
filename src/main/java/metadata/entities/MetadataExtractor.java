@@ -12,7 +12,7 @@ public interface MetadataExtractor {
      * get property value
      * @return
      */
-    public String getProperty();
+    public String getProperty(String propName);
 
     /**
      * get all properties as map

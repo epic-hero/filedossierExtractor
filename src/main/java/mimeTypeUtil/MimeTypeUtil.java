@@ -20,8 +20,7 @@ public class MimeTypeUtil {
     public static String guessMimeTypeFromByteArray(byte[] data) {
         InputStream is = new BufferedInputStream(new ByteArrayInputStream(data));
         try {
-            String mimeType = URLConnection.guessContentTypeFromStream(is);
-            return mimeType;
+            return URLConnection.guessContentTypeFromStream(is);
         } catch (IOException e) {
             throw new RuntimeException("Bad byte array data: " + e);
         }

@@ -1,3 +1,4 @@
+import metadata.entities.MetadataExtractor;
 import metadata.entities.PDFMetadataExtractor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -16,13 +17,9 @@ public class PdfMetadataExtractorTest {
 
         byte[] pdfDocument = Files.readAllBytes(Paths.get(Objects.requireNonNull(this.getClass().getClassLoader().getResource(
                 "example.pdf")).toURI()));
-
-        Map<String, String> extractedMetadata = MetadataExtractorFactory.getMetadata(new PDFMetadataExtractor(pdfDocument));
-
+        MetadataExtractor metadataExtractor = MetadataExtractorFactory.getMetadata(pdfDocument, "application/pdf");
+        Map<String, String> extractedMetadata = metadataExtractor.asMap();
         String firstExpectedValue = "D:20190725101641+04'00'";
-        String secondExpectedValue = "iText® 5.3.4 ©2000-2012 1T3XT BVBA (AGPL-version)";
-
         Assert.assertEquals(firstExpectedValue, extractedMetadata.get("CreationDate"));
-        Assert.assertEquals(secondExpectedValue, extractedMetadata.get("Producer"));
     }
 }
