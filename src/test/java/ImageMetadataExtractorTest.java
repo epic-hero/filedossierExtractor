@@ -1,4 +1,4 @@
-import metadata.entities.JPEGMetadataExtractor;
+
 import metadata.entities.MetadataExtractor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -21,10 +21,11 @@ public class ImageMetadataExtractorTest {
         imageExtractorEquals(metadataExtractor);
     }
 
-    private void imageExtractorEquals(MetadataExtractor metadataExtractor){
+    private void imageExtractorEquals(MetadataExtractor metadataExtractor) {
         Assert.assertEquals("doctree:11f462ebdb14a5673ff41a5c75c5176552fad343:2:2",
                 metadataExtractor.getProperty("barcode"));
         Assert.assertEquals("16:114:101:129;110:114:195:129;16:267:101:284;110:267:195:284",
                 metadataExtractor.getProperty("signatures"));
+
     }
 }
